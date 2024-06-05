@@ -19,9 +19,23 @@ Route::get('/', function () {
 
 Route::redirect('/dashboard', '/sales');
 
-Route::get('/sales', function () {
-    return view('coffee_sales');
-})->middleware(['auth'])->name('coffee.sales');
+
+Route::middleware(['auth'])->group(function () {
+
+// Route::get('/sales', function () {
+//     return view('coffee_sales');
+// })->name('coffee.sales');
+
+Route::get('/sales', [App\Http\Controllers\SalesController::class, 'getSales'])->name('coffee.sales');
+Route::post('/sales', [App\Http\Controllers\SalesController::class, 'store'])->name('coffee.store.sales');
+
+Route::get('/sales-with-product', [App\Http\Controllers\SalesController::class, 'indexWithProduct'])->name('coffee.product.sales');
+Route::post('/sales-with-product', [App\Http\Controllers\SalesController::class, 'storeWithProduct'])->name('coffee.product.store.sales');
+Route::get('/sales-data', [App\Http\Controllers\SalesController::class, 'getSales'])->name('coffee.sales.data');
+Route::get('/sales-data-with-product', [App\Http\Controllers\SalesController::class, 'getSalesWithProduct'])->name('coffee.product.sales-data');
+
+});
+
 
 Route::get('/shipping-partners', function () {
     return view('shipping_partners');

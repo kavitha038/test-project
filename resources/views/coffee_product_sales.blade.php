@@ -8,10 +8,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <p><a href="{{route('coffee.product.sales-data')}}">Part 2</a></p>
+                <p><a href="{{route('coffee.sales')}}">Part 1</a></p>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="post" action="{{route('coffee.store.sales')}}">
+                    <form method="post" action="{{route('coffee.product.store.sales')}}">
                         @csrf
+                        <div>
+                            <label for="product">Product</label>
+                            <select id="product" name="product" required>
+                                <option value="1">Gold Coffee</option>
+                                <option value="2">Arabic Coffee</option>
+                            </select>
+                        </div>
                         <div>
                             <label for="quantity">Quantity</label>
                             <input type="number" id="quantity" name="quantity" required>
